@@ -11,9 +11,11 @@ namespace cic
     class ProgramFlow
     {
         private readonly Options _options;
+        private readonly ConsoleColor _originalColor;
 
         public ProgramFlow(Options options)
         {
+            _originalColor = Console.ForegroundColor;
             _options = options;
         }
 
@@ -43,7 +45,9 @@ namespace cic
 
             if (string.IsNullOrWhiteSpace(organizationJiraUrl))
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Could not find the Jira Organization Url. You can specify it as a command line parameter or in the configuration file for this program. Please see --help for more details.");
+                Console.ForegroundColor = _originalColor;
                 return;
             }
             else
@@ -58,7 +62,9 @@ namespace cic
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Failed to make a Jira request: {0}", ex.Message);
+                Console.ForegroundColor = _originalColor;
             }
         }
 
@@ -74,8 +80,10 @@ namespace cic
 
             if (!string.IsNullOrWhiteSpace(issueKey))
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Created issue: {issueKey}");
                 Console.WriteLine($"Creating branch {issueKey} in repository {_options.RepositoryDirectory}");
+                Console.ForegroundColor = _originalColor;
 
                 var processInfo = new ProcessStartInfo
                 {
@@ -90,7 +98,9 @@ namespace cic
             }
             else
             {
-                Console.WriteLine("Could not create a Jira issue");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Could not create a Jira issue. This response was not expected: {0}", response);
+                Console.ForegroundColor = _originalColor;
             }
         }
 
