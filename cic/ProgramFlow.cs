@@ -39,7 +39,7 @@ namespace cic
 
             if (string.IsNullOrWhiteSpace(jiraApiUrl))
             {
-                Console.WriteLine("Could not find the Jira Api Url... exiing");
+                Console.WriteLine("Could not find the Jira Api Url... exiting");
                 return;
             }
 
