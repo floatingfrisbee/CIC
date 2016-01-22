@@ -71,8 +71,6 @@ _ReSharper*/
 *.bak 
 */[Pp]ublish/*
 *.vs10x
-*/[Dd]otfuscated/*
-[Dd]otfuscated/*
 *.vsp
 [Nn][Dd]epend[Oo]ut/*
 *.licx
@@ -81,19 +79,5 @@ _ReSharper*/
 *.csdef
 #Specific to our implementation
 ServiceConfiguration.cscfg
-DotAlignCRM/Server/GeneratedArtifacts/*
-DotAlignCRM/Client/GeneratedArtifacts/*
-DotAlignCRM/Common/GeneratedArtifacts/*
-DotAlignCRM/Client/ModelManifest.xml
-DotAlignCRM/Server/ModelManifest.xml
-DotAlignCRM/Server/Web/DotAlignCRM.Client.xap
-Data/ApplicationDatabase.db3
 /*.opensdf
-MAPIOutput/*
-Data/Images/*
-sign.bat
-signbundle.bat
-dependencies.wxs
-ConfuserEx/output/
-ConfuserEx/*.crproj*
 *.pfx
