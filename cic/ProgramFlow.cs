@@ -35,12 +35,20 @@ namespace cic
             json = json.Replace("ISSUEDESCRIPTION", _options.IssueDescription);
             json = json.Replace("ISSUETYPE", string.IsNullOrWhiteSpace(_options.IssueType) ? "Bug" : _options.IssueType);
 
-            var jiraApiUrl = ConfigurationManager.AppSettings["JiraApiUrl"];
+            var organizationJiraUrl = string.IsNullOrWhiteSpace(_options.OrganizationJiraUrl)
+                                                ? ConfigurationManager.AppSettings["OrganizationJiraUrl"]
+                                                : _options.OrganizationJiraUrl;
 
-            if (string.IsNullOrWhiteSpace(jiraApiUrl))
+            string jiraApiUrl;
+
+            if (string.IsNullOrWhiteSpace(organizationJiraUrl))
             {
-                Console.WriteLine("Could not find the Jira Api Url... exiting");
+                Console.WriteLine("Could not find the Jira Organization Url. You can specify it as a command line parameter or in the configuration file for this program. Please see --help for more details.");
                 return;
+            }
+            else
+            {
+                jiraApiUrl = $"{organizationJiraUrl}/rest/api/2/issue";
             }
 
             try
@@ -133,6 +141,7 @@ namespace cic
             var base64Credentials = GetEncodedCredentials(userName, password);
             request.Headers.Add("Authorization", "Basic " + base64Credentials);
 
+            Console.WriteLine("Making request to Jira url: {0}", url);
             var response = request.GetResponse();
 
             string text;

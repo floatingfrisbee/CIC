@@ -29,6 +29,9 @@ namespace cic
         [Option('a', "AssigneeUserName", HelpText = "UserName to assign the issue to. Defaults to the username supplied with the -u parameter", Required = false)]
         public string AssigneeUserName { get; set; }
 
+        [Option('j', "OrganizationJiraUrl", HelpText = "Your organization's Jira Url. This is what you type into the browser to get to your hosted Jira website. If not specified here, it can live in the configuration file of this program as an app setting with key=OrganizationJiraUrl", Required = false)]
+        public string OrganizationJiraUrl { get; set; }
+
         [HelpOption('?', "help")]
         public virtual string GetUsage()
         {
